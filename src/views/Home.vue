@@ -11,12 +11,18 @@
     <router-link class="btn btn-success add-link" to="/create"
       >Добавить тур</router-link
     >
+    <h2 class="mt-5">Города</h2>
+    <cities-list :cities="cities" />
+    <router-link class="btn btn-success add-link" to="/createcity"
+      >Добавить город</router-link
+    >
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { mapActions, mapGetters } from 'vuex'
+import CitiesList from '../components/citiesList.vue'
 
 import touresList from '../components/touresList'
 
@@ -24,6 +30,7 @@ export default {
   name: 'Home',
   components: {
     touresList,
+    CitiesList,
   },
   data() {
     return {
@@ -33,6 +40,7 @@ export default {
   computed: {
     ...mapGetters({
       toures: 'toures',
+      cities: 'cities',
     }),
 
     handleSearch() {
@@ -43,10 +51,12 @@ export default {
   },
   mounted() {
     this.fetchToures()
+    this.fetchCities()
   },
   methods: {
     ...mapActions({
       fetchToures: 'fetchToures',
+      fetchCities: 'fetchCities',
     }),
   },
 }
